@@ -1,5 +1,3 @@
-# `pratt-digital-cleanup-2026`
-
 # Pratt iSchool Digital Cleanup 2026
 
 **Brought to you by PALA, SAA, PEMP, and Patient & Pixels**
