@@ -2,13 +2,15 @@
 
 ## About
 
-In the second half of the workshop, we focus primarily on **best practices for organizing your current folder structure**. We'll walk through examples of how to develop that structure using the **Johnny Decimal system** and how to maintain it effectively for future use — including automating aspects to help you keep your structure up to date as you create and add new items to your digital workspace.
+In this workshop, we focus on **best practices for organizing your current folder structure**. We'll walk through how to develop a system using the **Johnny Decimal method**, how to maintain it, and how to automate parts of it using simple scripts you can run in Terminal.
 
-The example we'll use throughout this workshop is a common scenario for MLIS students: **managing your job search materials** — multiple résumés tailored to different types of positions, cover letters for specific openings, portfolio pieces, and application tracking across public libraries, archives, academic libraries, and UX roles.
+
+> **Who is this for?** This guide assumes you've **never used Terminal before**. Every step is explained from scratch. If you already know what `mkdir` does, feel free to skip ahead.
 
 ### Resources
 
 - **Johnny Decimal System** — [johnnydecimal.com](https://johnnydecimal.com/)
+- **Johnny Decimal Generator** — [johnny-decimal-generator.netlify.app](https://johnny-decimal-generator.netlify.app) *(drag-and-drop tool to plan your structure visually)*
 - **Homebrew** — [brew.sh](https://brew.sh/)
 - **NPM** — [npmjs.com](https://www.npmjs.com/)
 
@@ -16,380 +18,431 @@ The example we'll use throughout this workshop is a common scenario for MLIS stu
 
 ## Tools
 
-The tools required for this workshop:
+The tools used in this workshop:
 
-- **Terminal**
-- **Finder**
-- **Homebrew / NPM**
-
----
-
-## Step 01 — Setting Up Workspace Environment
-
-To start the workshop, we'll first set up our workspace environment and help you develop the structure. Then we'll go into more depth about the structure we'll use, how we'll use it, and what tools we'll need.
-
-We'll use **Terminal**, **Finder**, **Brew**, and **NPM**.
-
-> **Note:** This half of the workshop is primarily aimed at **Mac users**, since the setup is much easier. Setting up a Windows environment is a different process because Homebrew is not typically used on PCs.
+- **Terminal** — the command-line app built into every Mac (find it in Applications → Utilities → Terminal)
+- **Finder** — your regular file browser
+- **Homebrew** — a package manager that lets you install tools from Terminal
+- **NPM** — a package manager for JavaScript tools
 
 ---
 
-## Step 02 — What Is the Johnny Decimal System?
+## Step 01 — Getting Your Tools Ready
 
-The **Johnny Decimal** system is an organizational method where you assign unique numerical IDs (like `15.52`) to everything in your life, using a structure of **areas**, **categories**, and **individual items**.
+Before we organize anything, let's make sure your Mac is set up with the tools we'll need. This section walks you through installing **Homebrew**, **NPM**, and the **`tree`** command.
 
-Here's how it works:
+> **Note:** This workshop is primarily aimed at **Mac users**. Windows setup is a separate process because Homebrew is not available on PCs.
 
-- **Areas** are numbered in tens (`10-19`, `20-29`, etc.)
-- Each area contains up to **10 categories**
-- Each category holds **numbered items**
+### What is Terminal?
 
-Think of it like shelves holding boxes holding folders.
+Terminal is a text-based way to interact with your computer. Instead of clicking folders in Finder, you type commands. It looks intimidating at first, but you only need a handful of commands to get started.
 
-The constraint of **"no more than ten"** at each level prevents the chaotic nesting of folders that makes things impossible to find. The short, memorable IDs (spoken as "fifteen fifty-two") make it easy to communicate locations, maintain consistent organization, and quickly locate anything in your system.
+To open Terminal:
+1. Press `Cmd + Space` to open Spotlight
+2. Type "Terminal" and press Enter
 
-### Example Structure — MLIS Job Search
+You'll see a window with a blinking cursor. That's it — you're ready.
 
-Imagine you're graduating and applying to a mix of positions: reference librarian roles at public libraries, processing archivist positions, digital services roles at academic libraries, and UX research positions in tech. Your materials need to be organized, versioned, and easy to find at a moment's notice.
+### Installing Homebrew
 
-```
-10-19 Résumés/
-├── 11 Base Résumés/
-│   ├── 11.01 Public Library
-│   ├── 11.02 Academic Library
-│   ├── 11.03 Archives
-│   ├── 11.04 UX Research
-│   └── 11.05 Metadata & Cataloging
-├── 12 Résumé Assets/
-│   ├── 12.01 Summary Variants
-│   ├── 12.02 Skills List
-│   └── 12.03 ATS Templates
+Homebrew is a tool that lets you install other tools from Terminal. Think of it like an App Store for command-line programs.
 
-20-29 Cover Letters/
-├── 21 Templates/
-│   ├── 21.01 Public Library
-│   ├── 21.02 Academic Library
-│   ├── 21.03 Archives
-│   └── 21.04 UX & Tech
-├── 22 Submitted Letters/
-│   ├── 22.01 BPL Youth Services
-│   ├── 22.02 NYU Digital Scholarship
-│   ├── 22.03 NYPL Archives Processing
-│   └── 22.04 MoMA UX Research
-
-30-39 Portfolio & Work Samples/
-├── 31 Projects/
-│   ├── 31.01 Omeka Digital Exhibit
-│   ├── 31.02 EAD Finding Aid
-│   ├── 31.03 Library Usability Study
-│   ├── 31.04 Dublin Core Schema
-│   └── 31.05 Community Data Viz
-├── 32 Writing Samples/
-│   ├── 32.01 Information Behavior Paper
-│   └── 32.02 Open Access Brief
-├── 33 Presentations/
-│   ├── 33.01 SAA Conference Poster
-│   └── 33.02 ASIS&T Lightning Talk
-
-40-49 Job Applications/
-├── 41 Active Applications/
-│   ├── 41.01 BPL Youth Services
-│   ├── 41.02 NYU Digital Scholarship
-│   ├── 41.03 NYPL Archives Processing
-│   └── 41.04 MoMA UX Research
-├── 42 Application Tracker/
-│   └── 42.01 Master Tracker
-├── 43 Networking/
-│   ├── 43.01 Interview Notes
-│   └── 43.02 Conference Contacts
-
-50-59 References & Credentials/
-├── 51 References/
-│   ├── 51.01 Dr. Chen Faculty
-│   ├── 51.02 Library Practicum Supervisor
-│   └── 51.03 Project Lead Peer
-├── 52 Credentials/
-│   ├── 52.01 Unofficial Transcript
-│   ├── 52.02 Archival Description Cert
-│   └── 52.03 Digital Preservation Cert
-```
-
----
-
-## Step 03 — Creating Your Folder Structure via Command Line
-
-Now we'll use **Terminal** to create our Johnny Decimal folder structure. This is faster and more consistent than clicking through Finder.
-
-### Basic Commands
-
-| Command    | Description              | Example                                    |
-|------------|--------------------------|--------------------------------------------|
-| `mkdir`    | Make directory           | `mkdir "11 Base Résumés"`                  |
-| `mkdir -p` | Make nested directories  | `mkdir -p "10-19 Résumés/11 Base Résumés"` |
-| `cd`       | Change directory         | `cd ~/Documents`                           |
-| `ls`       | List contents            | `ls -la`                                   |
-| `mv`       | Move/rename files        | `mv old.pdf new.pdf`                       |
-
-### Creating a Complete Structure Manually
-
-Open Terminal and run the following commands one by one:
+Paste this into Terminal and press Enter:
 
 ```bash
-# Navigate to Documents
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+It will ask for your Mac password (the one you use to log in). When you type it, **nothing will appear on screen** — that's normal. Just type it and press Enter.
+
+To verify it installed correctly:
+
+```bash
+brew --version
+```
+
+You should see something like `Homebrew 4.x.x`.
+
+### Installing Node.js & NPM
+
+NPM comes bundled with Node.js. Install it through Homebrew:
+
+```bash
+brew install node
+```
+
+Verify it worked:
+
+```bash
+node --version
+npm --version
+```
+
+### Installing `tree` — See All Your Files at a Glance
+
+This is one of the most useful tools for this workshop. The `tree` command shows your entire folder structure visually, right in Terminal.
+
+```bash
+brew install tree
+```
+
+Now try it out — navigate to any folder and run:
+
+```bash
+tree ~/Desktop
+```
+
+You'll see something like:
+
+```
+Desktop/
+├── Screenshot 2026-01-15.png
+├── Screenshot 2026-02-03.png
+├── homework_final.docx
+├── homework_final_v2.docx
+├── random_notes.txt
+└── untitled folder/
+    └── more stuff/
+        └── old_resume.pdf
+```
+
+This gives you an instant overview of what's in any folder. We'll use `tree` throughout this workshop to check our work.
+
+### Basic Terminal Commands
+
+Here are the only commands you need to know for this workshop:
+
+| Command    | What It Does              | Example                        |
+|------------|---------------------------|--------------------------------|
+| `cd`       | Go to a folder            | `cd ~/Documents`               |
+| `ls`       | List what's in a folder   | `ls`                           |
+| `ls -la`   | List with details         | `ls -la`                       |
+| `mkdir`    | Create a folder           | `mkdir "My Folder"`            |
+| `mkdir -p` | Create nested folders     | `mkdir -p "Folder/Subfolder"`  |
+| `mv`       | Move or rename a file     | `mv old.pdf new.pdf`           |
+| `tree`     | Show folder tree          | `tree -d`  *(folders only)*    |
+| `open .`   | Open current folder in Finder | `open .`                   |
+
+> **Tip:** The `~` symbol means your home folder (e.g., `/Users/yourname`). So `~/Documents` is your Documents folder.
+
+### How to Run a Script File (.sh)
+
+Throughout this workshop, we'll use `.sh` script files to automate folder creation. Here's how to run them:
+
+```bash
+# Option 1 — Run with bash or zsh directly
+bash script.sh
+
+# Option 2 — Make it executable, then run it
+chmod +x script.sh
+./script.sh
+```
+
+Either method works. Option 1 is simpler if you're just getting started.
+
+---
+
+## Step 02 — Define Your System & Discovery
+
+Before creating any folders, you need to understand **what you're organizing** and **how you actually use your files**. This is the most important step — skip it and you'll end up with a pretty structure that doesn't match how you work.
+
+### Define Your System's Scope
+
+First, decide the boundary. What part of your digital life are you organizing?
+
+Pick **one** to start:
+- 📁 Your entire `Documents` folder
+- 📁 Your `Downloads` folder (the graveyard of forgotten files)
+- 📁 A specific project (like a semester's coursework)
+- 📁 Your job search materials
+
+Don't try to organize everything at once. **Start with one area.**
+
+### Discovery — Track What You Actually Do
+
+**Action:** For at least **one week**, write down everything you do (or need to do) within the scope you've defined.
+
+Keep a simple list — on paper, in Notes, wherever. Track things like:
+
+- What files did you download today? Where did they go?
+- What did you search for and couldn't find?
+- What folders did you open most often?
+- What did you rename or move?
+- What files are duplicates you keep re-creating?
+
+After a week, you'll see patterns. Those patterns become your **areas** and **categories**.
+
+---
+
+## Step 03 — Creating the Structure
+
+Now the fun part. We'll go from a **messy, real-world folder** to an **organized Johnny Decimal system**, and then create a **script to build it automatically**.
+
+### What Is the Johnny Decimal System?
+
+The **Johnny Decimal** system gives every folder a unique number so you always know where things are. It has three levels:
+
+- **Areas** — broad groups, numbered in tens (`10-19`, `20-29`, `30-39`)
+- **Categories** — topics within an area (`11`, `12`, `13`, etc.)
+- **IDs** — individual items (`11.01`, `11.02`, etc.)
+
+The key rule: **no more than 10 things at each level.** This forces you to keep things simple and prevents the endless nesting that makes folders impossible to navigate.
+
+### Planning Your Structure with the Johnny Decimal Generator
+
+Before creating any folders, we're going to use the **[Johnny Decimal Generator](https://johnny-decimal-generator.netlify.app)** to visually plan our structure. This is a free drag-and-drop tool that lets you experiment with areas and categories without touching any files yet.
+
+**How to use it:**
+
+1. Open the generator: [johnny-decimal-generator.netlify.app](https://johnny-decimal-generator.netlify.app)
+2. Click **"Add Area"** to create your broad groups (e.g., `Life Admin`, `My Hobby`)
+3. Under each area, click **"Add Category"** to add topics (e.g., under `Life Admin` → `House`, `Finance`)
+4. Drag and drop to rearrange until it feels right
+5. The tool automatically assigns the Johnny Decimal numbers for you
+
+**When you're done, your index will look something like this:**
+
+```
+10-19 Life Admin
+   11 House
+   12 Finance
+   13 Motor
+   14 Health
+   15 Travel
+20-29 My Hobby
+   21 Research
+   22 Promotion
+   23 Sales
+30-39 My Side-Hustle
+   31 Build It
+   32 Ship It
+```
+
+**Save your index as a text file:**
+
+1. Copy the index output from the generator
+2. Open a text editor (TextEdit on Mac, or any code editor)
+3. Paste it in and save as `my-index.txt` in your Documents folder
+
+You can also do this from Terminal:
+
+```bash
+# Create your index file — paste your index between the quotes
+cat > ~/Documents/my-index.txt << 'EOF'
+10-19 Life Admin
+   11 House
+   12 Finance
+   13 Motor
+   14 Health
+   15 Travel
+20-29 My Hobby
+   21 Research
+   22 Promotion
+   23 Sales
+30-39 My Side-Hustle
+   31 Build It
+   32 Ship It
+EOF
+```
+
+> **Why save this?** Your index file is your **map**. When you're unsure where a file should go, check your index. When you need to add a new category, update the index first, then create the folder.
+
+### Before: The Messy Folder
+
+Here's what a typical person's Documents folder looks like. Sound familiar?
+
+```
+Documents/
+├── car_insurance_renewal.pdf
+├── lease_scan.pdf
+├── taxes_2025.pdf
+├── dentist_receipt.jpg
+├── hobby_notes.txt
+├── etsy_sales_jan.csv
+├── some ideas/
+│   ├── project_sketch.png
+│   └── notes_v2.txt
+├── important maybe/
+│   ├── passport_photo.jpg
+│   └── old_electric_bill.pdf
+└── random/
+    ├── travel_itinerary.pdf
+    └── oil_change_receipt.pdf
+```
+
+**Problems:**
+- Life admin, hobbies, and side-hustle files all mixed together
+- Subfolders with vague names (`some ideas`, `important maybe`, `random`)
+- No consistent naming pattern
+- No way to know where a new file should go
+
+### After: The Organized Structure
+
+Using Johnny Decimal, we group everything into clear areas:
+
+```
+My System/
+├── 10-19 Life Admin/
+│   ├── 11 House/
+│   │   ├── 11.01 Lease/
+│   │   ├── 11.02 Electric/
+│   │   └── 11.03 Internet/
+│   ├── 12 Finance/
+│   │   └── 12.01 Taxes/
+│   ├── 13 Motor/
+│   │   ├── 13.01 Insurance/
+│   │   └── 13.02 Service/
+│   ├── 14 Health/
+│   │   └── 14.01 Receipts/
+│   └── 15 Travel/
+│       └── 15.01 Upcoming/
+│
+├── 20-29 My Hobby/
+│   ├── 21 Research/
+│   ├── 22 Promotion/
+│   │   ├── 22.01 Social Media/
+│   │   └── 22.02 Newsletter/
+│   └── 23 Sales/
+│
+└── 30-39 My Side-Hustle/
+    ├── 31 Build It/
+    └── 32 Ship It/
+```
+
+**What changed:**
+- Every file has a **home** — you never wonder where to save something
+- Related files are **grouped** (all life admin lives in `10-19`, hobby stuff in `20-29`)
+- The numbering makes things **findable** — "my car insurance is in `13.01`"
+- Each area of your life is **cleanly separated**
+
+### Building It Manually (Step by Step)
+
+Open Terminal and try creating a few folders to get comfortable:
+
+```bash
+# Go to Documents
 cd ~/Documents
 
-# Create the main Johnny.Decimal folder
-mkdir "JD-Workshop"
-cd "JD-Workshop"
+# Create the top-level folder
+mkdir "My System"
+cd "My System"
 
-# Create Areas
-mkdir "10-19 Résumés"
-mkdir "20-29 Cover Letters"
-mkdir "30-39 Portfolio & Work Samples"
-mkdir "40-49 Job Applications"
-mkdir "50-59 References & Credentials"
+# Create areas
+mkdir "10-19 Life Admin"
+mkdir "20-29 My Hobby"
+mkdir "30-39 My Side-Hustle"
 ```
 
-Now create **categories** within Résumés:
+Now create **categories** inside Life Admin:
 
 ```bash
-cd "10-19 Résumés"
-mkdir "11 Base Résumés"
-mkdir "12 Résumé Assets"
+cd "10-19 Life Admin"
+mkdir "11 House"
+mkdir "12 Finance"
+mkdir "13 Motor"
+mkdir "14 Health"
+mkdir "15 Travel"
 ```
 
-And create **IDs** (individual items) within Base Résumés:
+And create **IDs** inside House:
 
 ```bash
-cd "11 Base Résumés"
-mkdir "11.01 Public Library"
-mkdir "11.02 Academic Library"
-mkdir "11.03 Archives"
-mkdir "11.04 UX Research"
-mkdir "11.05 Metadata & Cataloging"
+cd "11 House"
+mkdir "11.01 Lease"
+mkdir "11.02 Electric"
+mkdir "11.03 Internet"
 ```
 
-> **Tip:** Notice how the numbering works — `11` is the category, and `.01`, `.02`, `.03` are the individual items within that category. Each résumé variant lives in its own folder so you can keep drafts, final versions, and exported PDFs together.
+Check your work with `tree`:
 
-### Using a Script to Build Everything at Once
+```bash
+cd ~/Documents/"My System"
+tree
+```
 
-Instead of typing each command manually, you can create a script that builds the whole structure for you.
+> **Tip:** You don't have to type the whole folder name. Type the first few letters and press `Tab` — Terminal will autocomplete it for you.
 
-Create a file called `build-structure.sh`:
+### Building It with a Script (The Easy Way)
+
+Typing each folder manually gets tedious. Instead, use a script to build everything at once.
+
+There's a sample script included with this workshop called `build-structure.sh`. Here's how to use it:
+
+**1. Open the script in a text editor and customize it for your needs**
+
+The script looks like this:
 
 ```bash
 #!/bin/bash
 
-# Johnny.Decimal Structure Builder — MLIS Job Search
-BASE_DIR="$HOME/Documents/JD-MLIS-Job-Search"
+# Johnny Decimal Structure Builder — My System
+BASE_DIR="$HOME/Documents/My System"
 
 # Create base directory
 mkdir -p "$BASE_DIR"
 cd "$BASE_DIR"
 
 # ===== AREAS =====
-mkdir -p "10-19 Résumés"
-mkdir -p "20-29 Cover Letters"
-mkdir -p "30-39 Portfolio & Work Samples"
-mkdir -p "40-49 Job Applications"
-mkdir -p "50-59 References & Credentials"
+mkdir -p "10-19 Life Admin"
+mkdir -p "20-29 My Hobby"
+mkdir -p "30-39 My Side-Hustle"
 
-# ===== CATEGORIES — Résumés =====
-mkdir -p "10-19 Résumés/11 Base Résumés"
-mkdir -p "10-19 Résumés/12 Résumé Assets"
+# ===== CATEGORIES — Life Admin =====
+mkdir -p "10-19 Life Admin/11 House"
+mkdir -p "10-19 Life Admin/12 Finance"
+mkdir -p "10-19 Life Admin/13 Motor"
+mkdir -p "10-19 Life Admin/14 Health"
+mkdir -p "10-19 Life Admin/15 Travel"
 
-# ===== CATEGORIES — Cover Letters =====
-mkdir -p "20-29 Cover Letters/21 Templates"
-mkdir -p "20-29 Cover Letters/22 Submitted Letters"
+# ===== CATEGORIES — My Hobby =====
+mkdir -p "20-29 My Hobby/21 Research"
+mkdir -p "20-29 My Hobby/22 Promotion"
+mkdir -p "20-29 My Hobby/23 Sales"
 
-# ===== CATEGORIES — Portfolio =====
-mkdir -p "30-39 Portfolio & Work Samples/31 Projects"
-mkdir -p "30-39 Portfolio & Work Samples/32 Writing Samples"
-mkdir -p "30-39 Portfolio & Work Samples/33 Presentations"
-
-# ===== CATEGORIES — Applications =====
-mkdir -p "40-49 Job Applications/41 Active Applications"
-mkdir -p "40-49 Job Applications/42 Application Tracker"
-mkdir -p "40-49 Job Applications/43 Networking"
-
-# ===== CATEGORIES — References =====
-mkdir -p "50-59 References & Credentials/51 References"
-mkdir -p "50-59 References & Credentials/52 Credentials"
+# ===== CATEGORIES — My Side-Hustle =====
+mkdir -p "30-39 My Side-Hustle/31 Build It"
+mkdir -p "30-39 My Side-Hustle/32 Ship It"
 
 echo "Structure created at: $BASE_DIR"
 ```
 
-Run it:
+**2. Run it:**
 
 ```bash
-chmod +x build-structure.sh
-./build-structure.sh
+bash build-structure.sh
 ```
+
+That's it — your entire folder structure is created in seconds.
+
+**3. Verify it worked:**
+
+```bash
+tree ~/Documents/"My System"
+```
+
+### Moving Your Existing Files
+
+Now that the structure exists, move your files into it:
+
+```bash
+# Move your lease into the right folder
+mv ~/Documents/lease_scan.pdf ~/Documents/"My System"/"10-19 Life Admin"/"11 House"/"11.01 Lease"/
+
+# Move tax documents
+mv ~/Documents/taxes_2025.pdf ~/Documents/"My System"/"10-19 Life Admin"/"12 Finance"/"12.01 Taxes"/
+
+# Move car insurance
+mv ~/Documents/car_insurance_renewal.pdf ~/Documents/"My System"/"10-19 Life Admin"/"13 Motor"/"13.01 Insurance"/
+
+# Move hobby research
+mv ~/Documents/hobby_notes.txt ~/Documents/"My System"/"20-29 My Hobby"/"21 Research"/
+```
+
+> **Tip:** You can also just drag files in Finder — now that the folders exist, Finder works great for moving things around. Use Terminal for creating structure, Finder for day-to-day file management.
 
 ---
 
-## Step 04 — Automating Folder Creation from a Text File
-
-This is where things get powerful. Instead of manually typing each folder, you can **define your entire structure in a simple text file** and generate it automatically.
-
-### Create Your Structure Definition File
-
-Create a file called `my-structure.txt`:
-
-```text
-# ===== Résumés =====
-10-19 Résumés
-10-19 Résumés/11 Base Résumés
-10-19 Résumés/11 Base Résumés/11.01 Public Library
-10-19 Résumés/11 Base Résumés/11.02 Academic Library
-10-19 Résumés/11 Base Résumés/11.03 Archives
-10-19 Résumés/11 Base Résumés/11.04 UX Research
-10-19 Résumés/11 Base Résumés/11.05 Metadata & Cataloging
-10-19 Résumés/12 Résumé Assets
-10-19 Résumés/12 Résumé Assets/12.01 Summary Variants
-10-19 Résumés/12 Résumé Assets/12.02 Skills List
-10-19 Résumés/12 Résumé Assets/12.03 ATS Templates
-
-# ===== Cover Letters =====
-20-29 Cover Letters
-20-29 Cover Letters/21 Templates
-20-29 Cover Letters/21 Templates/21.01 Public Library
-20-29 Cover Letters/21 Templates/21.02 Academic Library
-20-29 Cover Letters/21 Templates/21.03 Archives
-20-29 Cover Letters/21 Templates/21.04 UX & Tech
-20-29 Cover Letters/22 Submitted Letters
-20-29 Cover Letters/22 Submitted Letters/22.01 BPL Youth Services
-20-29 Cover Letters/22 Submitted Letters/22.02 NYU Digital Scholarship
-20-29 Cover Letters/22 Submitted Letters/22.03 NYPL Archives Processing
-20-29 Cover Letters/22 Submitted Letters/22.04 MoMA UX Research
-
-# ===== Portfolio =====
-30-39 Portfolio & Work Samples
-30-39 Portfolio & Work Samples/31 Projects
-30-39 Portfolio & Work Samples/31 Projects/31.01 Omeka Digital Exhibit
-30-39 Portfolio & Work Samples/31 Projects/31.02 EAD Finding Aid
-30-39 Portfolio & Work Samples/31 Projects/31.03 Library Usability Study
-30-39 Portfolio & Work Samples/31 Projects/31.04 Dublin Core Schema
-30-39 Portfolio & Work Samples/31 Projects/31.05 Community Data Viz
-30-39 Portfolio & Work Samples/32 Writing Samples
-30-39 Portfolio & Work Samples/32 Writing Samples/32.01 Information Behavior Paper
-30-39 Portfolio & Work Samples/32 Writing Samples/32.02 Open Access Brief
-30-39 Portfolio & Work Samples/33 Presentations
-30-39 Portfolio & Work Samples/33 Presentations/33.01 SAA Conference Poster
-30-39 Portfolio & Work Samples/33 Presentations/33.02 ASIS&T Lightning Talk
-
-# ===== Applications =====
-40-49 Job Applications
-40-49 Job Applications/41 Active Applications
-40-49 Job Applications/41 Active Applications/41.01 BPL Youth Services
-40-49 Job Applications/41 Active Applications/41.02 NYU Digital Scholarship
-40-49 Job Applications/41 Active Applications/41.03 NYPL Archives Processing
-40-49 Job Applications/41 Active Applications/41.04 MoMA UX Research
-40-49 Job Applications/42 Application Tracker
-40-49 Job Applications/42 Application Tracker/42.01 Master Tracker
-40-49 Job Applications/43 Networking
-40-49 Job Applications/43 Networking/43.01 Interview Notes
-40-49 Job Applications/43 Networking/43.02 Conference Contacts
-
-# ===== References =====
-50-59 References & Credentials
-50-59 References & Credentials/51 References
-50-59 References & Credentials/51 References/51.01 Dr. Chen Faculty
-50-59 References & Credentials/51 References/51.02 Library Practicum Supervisor
-50-59 References & Credentials/51 References/51.03 Project Lead Peer
-50-59 References & Credentials/52 Credentials
-50-59 References & Credentials/52 Credentials/52.01 Unofficial Transcript
-50-59 References & Credentials/52 Credentials/52.02 Archival Description Cert
-50-59 References & Credentials/52 Credentials/52.03 Digital Preservation Cert
-```
-
-Each line represents a folder path. The script will read each line and create the folder for you.
-
-### Bash Script to Generate Folders from Text File
-
-Create a file called `generate-from-txt.sh`:
-
-```bash
-#!/bin/bash
-
-INPUT_FILE="$1"
-DEST_DIR="${2:-$HOME/Documents/JD-Generated}"
-
-if [ ! -f "$INPUT_FILE" ]; then
-    echo "Error: File not found"
-    exit 1
-fi
-
-mkdir -p "$DEST_DIR"
-
-while IFS= read -r line || [ -n "$line" ]; do
-    [[ -z "$line" || "$line" =~ ^# ]] && continue
-    mkdir -p "$DEST_DIR/$line"
-    echo "Created: $line"
-done < "$INPUT_FILE"
-
-echo "Structure generated at: $DEST_DIR"
-```
-
-Run it:
-
-```bash
-chmod +x generate-from-txt.sh
-./generate-from-txt.sh my-structure.txt ~/Documents/MLIS-Job-Search
-```
-
-> **What's happening here:** The script reads each line from `my-structure.txt`, skips any blank lines or comments (lines starting with `#`), and creates the corresponding folder. The `mkdir -p` flag ensures all parent folders are created automatically.
-
----
-
-## Step 05 — Batch Renaming Files to Match Johnny Decimal
-
-Often you'll have existing files that need to be renamed to fit your new system. Here's how to automate that.
-
-### Create a Rename Mapping File
-
-Create a file called `rename-map.txt`. Each line has the **old filename** and the **new filename**, separated by a `|` character:
-
-```text
-resume_final_v3.pdf|11.01 Public Library Resume.pdf
-resume-academic-draft2.docx|11.02 Academic Library Resume.docx
-cover-letter-bpl.pdf|22.01 BPL Youth Services.pdf
-omeka-exhibit-screenshots.zip|31.01 Omeka Digital Exhibit.zip
-prof-chen-reference-letter.pdf|51.01 Dr. Chen Faculty.pdf
-transcript-unofficial-2026.pdf|52.01 Unofficial Transcript.pdf
-```
-
-### Create the Batch Rename Script
-
-Create a file called `batch-rename.sh`:
-
-```bash
-#!/bin/bash
-
-MAP_FILE="$1"
-TARGET_DIR="${2:-.}"
-
-cd "$TARGET_DIR"
-
-while IFS='|' read -r old_name new_name; do
-    [[ -z "$old_name" ]] && continue
-    if [ -f "$old_name" ]; then
-        mv "$old_name" "$new_name"
-        echo "Renamed: $old_name -> $new_name"
-    fi
-done < "$MAP_FILE"
-```
-
-Run it:
-
-```bash
-chmod +x batch-rename.sh
-./batch-rename.sh rename-map.txt ~/Downloads
-```
-
----
-
-## Step 06 — Maintaining Your System
+## Step 04 — Maintaining Your System
 
 ### Create an Index File
 
@@ -398,8 +451,8 @@ Keep a master index that tracks all your IDs. This script scans your folder stru
 ```bash
 #!/bin/bash
 
-# Generate Johnny.Decimal Index
-echo "# My MLIS Job Search — Johnny.Decimal Index" > INDEX.md
+# Generate Johnny Decimal Index
+echo "# My System — Johnny Decimal Index" > INDEX.md
 echo "Last updated: $(date)" >> INDEX.md
 
 find . -type d | sort | while read dir; do
@@ -411,66 +464,46 @@ done
 echo "INDEX.md generated!"
 ```
 
-### Quick Add Script
-
-Create a script to quickly add new items to your system without navigating through folders:
+Save this as `generate-index.sh` in your `My System` folder and run it:
 
 ```bash
-#!/bin/bash
-
-# Usage: ./jd-add.sh "22.05" "Pratt Digital Archivist"
-ID="$1"
-NAME="$2"
-BASE="$HOME/Documents/JD-MLIS-Job-Search"
-
-CATEGORY="${ID%.*}"
-CATEGORY_PATH=$(find "$BASE" -type d -name "${CATEGORY} *" | head -1)
-
-FULL_PATH="$CATEGORY_PATH/${ID} ${NAME}"
-mkdir -p "$FULL_PATH"
-echo "Created: ${ID} ${NAME}"
+cd ~/Documents/"My System"
+bash generate-index.sh
 ```
 
-### Practical Tips for MLIS Job Seekers
+This creates an `INDEX.md` file listing every folder in your system. Run it any time you add new folders to keep your index up to date.
 
-- **Version your résumés.** When you update a résumé, keep the previous version in the same folder with a date suffix (e.g., `resume_2026-03.pdf`, `resume_2026-04.pdf`). The JD ID stays the same — the folder is the anchor.
-- **Mirror cover letters to applications.** Use the same JD number in `22 Submitted Letters` and `41 Active Applications` when they belong to the same job. For instance, `22.01` and `41.01` both refer to the Brooklyn Public Library application.
-- **Track everything in `42.01`.** A simple spreadsheet with columns for **Organization**, **Position**, **Date Applied**, **Status**, **Follow-Up Date**, and the **JD IDs** of related résumé/cover letter folders ties everything together.
-- **Portfolio pieces are reusable.** Your `30-39` area should contain finished, polished work samples. When you apply to a job, reference the relevant `31.xx` or `32.xx` ID — don't duplicate files across application folders.
+### Practical Tips
+
+- **Version your files with dates**, not words. Use `taxes_2025.pdf` instead of `taxes_final_FINAL.pdf`.
+- **One file, one home.** Every file should live in exactly one place. If you're unsure, check your index.
+- **Don't duplicate files.** If a file is relevant to multiple categories, pick the best one and keep it there.
+- **Update your index first.** When you need a new category, add it to `my-index.txt` before creating the folder.
 
 ---
 
-## Quick Reference Card
+## Step 05 — Quick Reference Card
 
-| Task                 | Command                                        |
-|----------------------|------------------------------------------------|
-| Create folder        | `mkdir "11.01 Public Library"`                 |
-| Create nested folders| `mkdir -p "Area/Category/Item"`                |
-| Rename file          | `mv "old.pdf" "11.01 Resume.pdf"`             |
-| List all folders     | `find . -type d \| sort`                       |
-| Generate index       | `tree -d > INDEX.txt`                          |
-| Open in Finder       | `open .`                                       |
+| Task                  | Command                                            |
+|-----------------------|----------------------------------------------------|
+| Create folder         | `mkdir "11.01 Lease"`                              |
+| Create nested folders | `mkdir -p "Area/Category/Item"`                    |
+| Rename file           | `mv "old.pdf" "13.01 Insurance.pdf"`               |
+| Move a file           | `mv file.pdf "destination/folder/"`                |
+| List folder contents  | `ls -la`                                           |
+| Show folder tree      | `tree -d`                                          |
+| Run a script          | `bash script.sh`                                   |
+| Open folder in Finder | `open .`                                           |
 
 ---
 
-## Workshop Exercise
+## Step 06 — Workshop Exercise
 
-**Your Task:** Create a Johnny Decimal structure for your own MLIS job search.
+**Your Task:** Create a Johnny Decimal structure for your own digital cleanup.
 
-1. Open **Terminal**
-2. Navigate to Documents: `cd ~/Documents`
-3. Create your structure using the scripts provided
-4. Customize the areas and categories for **the types of positions you're targeting** (public library, academic, archives, UX, special collections, etc.)
-5. Move 3–5 existing files (résumés, cover letters, project samples) into your new system
-6. Generate an `INDEX.md` file
-
-### Bonus
-
-Create a shell alias for quick access:
-
-```bash
-echo 'alias jd="cd ~/Documents/JD-MLIS-Job-Search && ls"' >> ~/.zshrc
-source ~/.zshrc
-```
-
-Now just type `jd` to jump to your organized job search system!
+1. **Define your scope** — pick one area of your digital life to organize
+2. **Plan your structure** — use the [Johnny Decimal Generator](https://johnny-decimal-generator.netlify.app) to sketch it out
+3. **Customize the sample script** — edit `build-structure.sh` to match your plan
+4. **Run the script** — `bash build-structure.sh`
+5. **Move 3–5 existing files** into your new system
+6. **Verify with `tree`** — run `tree -d` to see the result
