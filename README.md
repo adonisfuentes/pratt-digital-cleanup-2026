@@ -12,20 +12,20 @@ A hands-on workshop series designed to help students take control of their digit
 
 ## Workshops
 
-| # | Workshop | Description |
-|---|----------|-------------|
-| 01 | [Canvas Backup](./Workshop%2001%20(Canvas%20Backup)) | Download and preserve all of your Canvas assignments, materials, and course files. |
-| 02 | [Folder Cleanup](./Workshop%2002%20(Folder%20Cleanup)) | Organize your folder structure using the Johnny Decimal system with automation scripts. |
+| # | Workshop | Description | Mac | Windows |
+|---|----------|-------------|-----|---------|
+| 01 | Canvas Backup | Download and preserve all of your Canvas assignments, materials, and course files. | [Mac Guide](./Workshop%2001%20(Canvas%20Backup)/README.md) | [Windows Guide](./Workshop%2001%20(Canvas%20Backup)/README-Windows.md) |
+| 02 | [Folder Cleanup](./Workshop%2002%20(Folder%20Cleanup)) | Organize your folder structure using the Johnny Decimal system with automation scripts. | ✅ | — |
 
 ## Getting Started
 
-Each workshop folder contains its own `README.md` with a full step-by-step walkthrough. Start with **Workshop 01** and work through them in order.
+Each workshop folder contains its own `README.md` with a full step-by-step walkthrough. Start with **Workshop 01** and work through them in order. **Workshop 01 has separate guides for Mac and Windows** — pick the one that matches your laptop.
 
 ### Prerequisites
 
 - A laptop (Mac or Windows)
 - A web browser
-- Terminal / Command Prompt access
+- Terminal (Mac) / PowerShell (Windows)
 
 Additional tools may be required per workshop — check each workshop's README for specifics.
 
@@ -33,9 +33,12 @@ Additional tools may be required per workshop — check each workshop's README f
 
 Back up everything from your Canvas account: assignments, course materials, grades, and more. This workshop uses the [Canvas Student Data Export](https://github.com/davekats/canvas-student-data-export) tool along with Python and NPM to automate the entire process.
 
-**Tools needed:** Terminal, Python 3.8+, Node.js 16+, Browser
+**Tools needed:** Terminal or PowerShell, Python 3.8+, Node.js 16+, Browser
 
-➡️ [Go to Workshop 01](./Workshop%2001%20(Canvas%20Backup))
+| Platform | Guide |
+|----------|-------|
+| 🍎 Mac | [Workshop 01 — Mac](./Workshop%2001%20(Canvas%20Backup)/README.md) |
+| 🪟 Windows | [Workshop 01 — Windows](./Workshop%2001%20(Canvas%20Backup)/README-Windows.md) |
 
 ## Workshop 02 — Folder Cleanup & Organization
 
