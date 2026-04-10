@@ -51,12 +51,12 @@ These are the two things you will need to extract all the elements for backing u
 
 ![GitHub Repository Page](01%20Github.png)
 
-2. Download this repository to your **Documents** folder on your laptop (or wherever it's easily accessible for you).
-3. On the repository page, click **Code** → **Download ZIP**.
+1. Download this repository to your **Documents** folder on your laptop (or wherever it's easily accessible for you).
+2. On the repository page, click **Code** → **Download ZIP**.
 
 > **Note:** If you already have GitHub Desktop installed, it makes it much easier to clone the repository, which means you can also contribute to this project. However, for the sake of this workshop, we're not going to do that — just download the ZIP.
 
-4. Once you click Download, the folder will be on your desktop.
+1. Once you click Download, the folder will be on your desktop.
 
 ---
 
@@ -81,6 +81,21 @@ Now that we have both the environment set up and the project repository download
 5. A pop-up will display the token. **Copy it and save it in a safe, easily accessible location.**
 
 > ⚠️ **Important:** Once you generate this access token, you won't be able to view it again. If you lose it, you'll have to generate a new one. **Do not share this token with anyone.**
+
+### Find Your User ID
+
+1. Go back to the Canvas **Dashboard**.
+2. Click on your **profile picture** or name in the left sidebar.
+3. In the profile panel that appears, click the **title link with your name** (e.g., "John Doe's Profile").
+4. Look at the URL in your browser's address bar — it will look something like this:
+
+   ```
+   https://pratt.instructure.com/about/12345
+   ```
+
+5. The number after `/about/` is your **User ID**. In this example, the User ID is `12345`.
+
+> **Tip:** Copy this number and save it alongside your API token — you'll need it when setting up the credentials file.
 
 ---
 
@@ -149,16 +164,17 @@ Now that we have all the dependencies installed, we'll configure the project and
 touch credentials.yaml
 ```
 
-3. Open the file and paste the required content. It should look something like this:
+1. Open the file and paste the required content. It should look something like this:
 
 ```yaml
-API_URL: "https://canvas.pratt.edu"
+API_URL: "https://pratt.instructure.com/"
 API_KEY: "your_api_token_here"
+USER_ID: "your_user_id_here"
 ```
 
-Replace `your_api_token_here` with the API token you saved earlier.
+Replace `your_api_token_here` with the API token you saved earlier, and replace `your_user_id_here` with the User ID you found in your profile URL.
 
-![Credentials file configuration](03%20Credentials.png)
+> **Reminder:** The API URL for Pratt's Canvas is `https://pratt.instructure.com/` — make sure to use this exact URL.
 
 ---
 
