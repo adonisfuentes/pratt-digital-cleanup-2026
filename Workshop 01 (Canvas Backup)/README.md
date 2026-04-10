@@ -72,6 +72,8 @@ Now that we have both the environment set up and the project repository download
 4. In the pop-up/menu, you'll see options like Notifications, Profile, Files, Settings, and Portfolio. Click **Settings**.
 5. On the Settings page, scroll down to the section labeled **Approved Integrations** — for third-party applications that can access the Canvas site on your behalf.
 
+![Canvas API Settings Page](03%20API.png)
+
 ### Create a New Access Token
 
 1. Click the **+ New Access Token** button.
@@ -94,6 +96,8 @@ Now that we have both the environment set up and the project repository download
    ```
 
 5. The number after `/about/` is your **User ID**. In this example, the User ID is `12345`.
+
+![Finding your User ID in the profile URL](03%20Find%20Your%20User%20ID.png)
 
 > **Tip:** Copy this number and save it alongside your API token — you'll need it when setting up the credentials file.
 
@@ -121,7 +125,7 @@ cd /path/to/canvas-student-data-export
 
 Replace `/path/to/` with the actual path you copied.
 
-![Terminal — navigating to the project folder](02%20Terminal.png)
+![Terminal — installing project dependencies](05%20Dependencies.png)
 
 ### Install Dependencies
 
@@ -176,6 +180,8 @@ Replace `your_api_token_here` with the API token you saved earlier, and replace 
 
 > **Reminder:** The API URL for Pratt's Canvas is `https://pratt.instructure.com/` — make sure to use this exact URL.
 
+![Credentials file configuration](06%20Credentials.png)
+
 ---
 
 ## Step 07 — Start Backup
@@ -191,6 +197,8 @@ python export.py
 You can refer back to the [GitHub repository](https://github.com/davekats/canvas-student-data-export) to copy the command; it's also provided in this workshop documentation.
 
 When you run it, you should see it start accessing the API and downloading everything. All files will go into the default folder within the project repository we downloaded.
+
+![Running the Canvas backup export](07%20Backup.png)
 
 Let it run until it finishes — at the end, it should tell you when it's done.
 
